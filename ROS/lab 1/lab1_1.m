@@ -1,0 +1,94 @@
+clear all;
+close all;
+clc;
+%% Initiating ros master
+try
+    rosinit
+catch er
+    rosshutdown
+    rosinit
+end
+
+%% chekcing for running nodes list
+fprintf("\n--------------- Available nodes: \n")
+rosnode list
+% it just returns /matlab_global_node which is the default background node 
+% MATLAB creates automatically to communicate with the ROS Master.
+
+%% checking for running topic list
+fprintf("\n-------------- Available topics: \n")
+rostopic list
+% /rosout ----> Every node in the network publishes its console output, 
+% warnings, and error messages to this topic.
+
+% /tf ---> It tracks the relationship between different coordinate frames 
+% (e.g., the relationship between a "robot_base" and a "laser_scanner").
+
+%% Introducing a sample network
+exampleHelperROSCreateSampleNetwork %It creates a fake network with nodes, topics, etc
+
+%% checking for the running nodes after running the sample network
+fprintf("\n-------------- Available nodes: \n")
+rosnode list
+
+%% checking for the running topics after runnign the sample network
+fprintf("\n-------Available topics: \n")
+rostopic list
+
+%% detailed infromation about an specific ndoe
+fprintf('\n-------------- node information: \n')
+rosnode info /node_1
+% URI: The URI (Uniform Resource Identifier) is the specific network address
+% and port number used by the ROS Master and other nodes to find and communicate with /node_1.
+
+fprintf('\n-------------- node ping: \n')
+rosnode ping /node_1
+% tests the connectivity between your MATLAB session and that specific node.
+
+%% checking information about an specific topic
+fprintf('\n-------------- topic information: \n')
+rostopic info /pose
+% getting info about a topic. type, publishers, subscribers
+
+fprintf('\n-------------- topic type: \n')
+rostopic type /pose
+% geometry_msgs/Twist ----> the standard ROS format for representing velocity 
+% in 3D space, divided into two main vectors: linear and angular. 
+% geometry_msgs is a standard ROS package (a collection of related tools and message definitions).
+% Twist is the specific template or data structure defined inside that package.
+
+%% checking flowing data inside an specific topic
+fprintf('\n-------------- topic data: \n')
+rostopic echo /pose
+
+%% Shutdown ROS Master
+rosshutdown
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
