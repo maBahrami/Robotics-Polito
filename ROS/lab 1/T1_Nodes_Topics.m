@@ -64,31 +64,3 @@ rostopic echo /pose
 %% Shutdown ROS Master
 rosshutdown
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
